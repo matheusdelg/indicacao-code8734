@@ -1,11 +1,8 @@
-<?
+<?php
 
-use mdi\InternalDataModule;
-use mse\ExtenalServiceModule;
-
-require_once( __DIR__ . "/../../Exceptions.php");
-require_once( __DIR__ . "/../mdi/InternalDataModule.php");
-require_once( __DIR__ . "/../mse/ExternalServiceModule.php");
+require_once("Exceptions.php");
+require_once("modules/mdi/InternalDataModule.php");
+require_once("modules/mse/ExternalServiceModule.php");
 
 class CaptationModule {
 
@@ -35,7 +32,7 @@ class CaptationModule {
         if(!isset($request['timestamp'])) 
             throw new ValidationException("Atributo 'timestamp' faltando.");
 
-        $mdi = new mdi\InternalDataModule();
+        $mdi = new InternalDataModule();
         $pageExists = $mdi->checkPageKey($request['page_key']);
 
         if (!$pageExists) 
@@ -51,7 +48,7 @@ class CaptationModule {
      */
     public function validateIndicated () {
         
-        $mdi = new mdi\InternalDataModule();
+        $mdi = new InternalDataModule();
         $indicatedIsValid = !$mdi->checkIndicated($this->request['indicated']);
 
         return $indicatedIsValid;
@@ -64,8 +61,14 @@ class CaptationModule {
      */
     public function validateIndicator () {
 
-        $mse = new mse\ExternalServiceModule("SharpSpring");
-        $indicatorIsValid = (boolean) $mse->call("checkIndicator", $this->request['indicator']);
+        $mse = new ExternalServiceModule("SharpSpring");
+        
+        $params = ['where' => [
+            'emailAddress' => $this->request['indicator']
+        ]];
+
+        $indicatorIsValid = $mse->call("getLeads", $params);
+        $indicatorIsValid = count($indicatorIsValid) > 0;
 
         return $indicatorIsValid;
     }

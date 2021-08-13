@@ -1,5 +1,4 @@
-<?
-namespace mdi;
+<?php
 
 class InternalDataModule {
 
