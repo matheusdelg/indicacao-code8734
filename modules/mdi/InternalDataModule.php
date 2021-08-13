@@ -12,5 +12,15 @@ class InternalDataModule {
     public function checkPageKey($page_key) {
         return true;
     }
+
+    /**
+     * Verifica se há registro de 'indicated_email' na tabela 'indications' no banco de dados.
+     *
+     * @param string $indicated_email
+     * @return boolean
+     */
+    public function checkIndicated($indicated_email) {
+        return false;
+    }
 }
 

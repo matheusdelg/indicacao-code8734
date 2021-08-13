@@ -66,8 +66,8 @@ O Módulo de Dados Internos (MDI) tem a responsabilidade de registrar novas pág
 São métodos do MDI:
 - `checkPageKey(string $page_key) => boolean`: verifica se a string informada consta na tabela de páginas registradas.
 - `registerPageKey(string $new_page_key) => boolean`: registra uma nova `page_key` na tabela de páginas.
-- `checkIndication(string $indicated) => boolean`: verifica se o e-mail do indicado consta nas tabelas de indicação.
-- `registerIndication(string $indicated, string $timestamp) => boolean`: registra uma nova indicação na tabela de indicações.
+- `checkIndicated(string $indicated) => boolean`: verifica se o e-mail do indicado consta nas tabelas de indicação.
+- `registerIndicated(string $indicated, string $timestamp) => boolean`: registra uma nova indicação na tabela de indicações.
 
 ### Módulo de Serviços Externos
 Módulo que realiza consultas em diferentes APIs, filtrando apenas as informações relevantes para as outras camadas da aplicação. Como, futuramente, a bonificação pode ser realizada também em serviços externos, deve estar aberta para extensões. Exemplo de chamada do MSE:
