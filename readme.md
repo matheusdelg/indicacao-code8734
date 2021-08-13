@@ -50,6 +50,8 @@ O Módulo de captação deve então acionar o Módulo de Servicos Externos (MSE)
 ```
 São métodos do MC:
 - `validatePageInfo(array $request) => throws 'ValidationException'` recebe a requisição HTTP da aplicação principal (main) e armazena as informações da request em uma variável interna.
+- `validateIndicated() => throws 'ServiceException'` encapsulamento do método de validação do MSE.
+- `validateIndicator() => throws 'ValidationException'` encapsulamento do método de validação do MDI.
 
 ### Módulo de Dados Internos
 O Módulo de Dados Internos (MDI) tem a responsabilidade de registrar novas páginas de captação e consultar a existência delas, gerando a elas um atribuito `page_key` em uma tabela no banco de dados no primeiro caso. Também é responsável por responder ao MC se o indicado já foi registrado nas tabelas de indicação. Por fim, também é responsável por atualizar os registros no processo de Confirmação. Exemplo de chamada do MDI, avisando o Módulo de Bonificação (MB) de uma nova Confirmação em uma tabela:
