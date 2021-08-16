@@ -11,6 +11,14 @@ const EXPECTED_OUTPUT_DICT = [
     ],
 ];
 
+const DATABASE_CONFIG = [
+    'DB_USER' => 'indicacao_user',
+    'DB_PSWD' => '',
+    'DB_NAME' => 'indicacao_code8734',
+    'DB_HOST' => 'localhost',
+    'MAX_QUOTA' => 500,
+];
+
 const SHARPSPRING_CONFIG = [
     "ACCOUNT_ID" => "",
     "SECRET_KEY" => "",

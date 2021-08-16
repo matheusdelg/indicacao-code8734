@@ -1,6 +1,8 @@
 <?php
 
-class InternalDataModule {
+require_once("DatabaseManipulator.php");
+
+class InternalDataModule extends DatabaseManipulator {
 
     /**
      * Verifica se há registro de 'page_key' na tabela 'registered_pages' do banco de dados.
@@ -8,8 +10,10 @@ class InternalDataModule {
      * @param string $page_key
      * @return boolean
      */
-    public function checkPageKey($page_key) {
-        return true;
+    public function checkPageKey(string $page_key) {
+        $pages = $this->getRecords('registered_pages', ['page_key' => $page_key]);
+
+        return count($pages) > 0;
     }
 
     /**
@@ -18,8 +22,24 @@ class InternalDataModule {
      * @param string $indicated_email
      * @return boolean
      */
-    public function checkIndicated($indicated_email) {
-        return false;
+    public function checkIndicated(string $indicated_email) {
+        $indications = $this->getRecords('indications', ['indicated' => $indicated_email]);
+        
+        return count($indications) == 0;
+    }
+
+    /**
+     * Registra uma nova 'page_key' na tabela 'registered_pages' do banco de dados.
+     *
+     * @param string $new_page_key
+     */
+    public function registerPageKey(string $new_page_key) {
+
+        $page_exists = $this->checkPageKey($new_page_key);
+
+        if (!$page_exists) {
+            $this->insertRecord('registered_pages', ['page_key' => $new_page_key]);
+        }
     }
 }
 
