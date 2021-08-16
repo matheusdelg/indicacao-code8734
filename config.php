@@ -1,6 +1,7 @@
 <?php
 const ERR_VAL = "Validation Error";
 const ERR_API = "External API Error";
+const ERR_INT = "Internal Error";
 const STAT_OK = "Ok";
 
 const AVAILABLE_APIS = ["SharpSpring"];

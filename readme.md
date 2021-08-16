@@ -37,7 +37,7 @@ O Módulo de Captação (MC) consiste em uma aplicação para receber registros 
     data: {
         indicator: "cliente@code8734.com.br",
         indicated: "novapessoa@code8734.com.br",
-        timestamp: "2021-08-12 16:57:30"
+        create_timestamp: "2021-08-12 16:57:30"
     }
 }
 ```
@@ -45,7 +45,7 @@ O Módulo de captação deve então acionar o Módulo de Servicos Externos (MSE)
 ```javascript
 {
     status: "OK",
-    log: "Indicação cadastrada com sucesso!";
+    description: "Indicação cadastrada com sucesso!";
 }
 ```
 São métodos do MC:
@@ -92,6 +92,3 @@ Ainda sobre o MSE, note que pode ser necessário instanciar objetos de subclasse
         'returnValue' => mixed
     ]
 ```
-
-### Módulo de Bonificação
-O Módulo de Bonificação (MB) entra em ação quando os registros são atualizados pelo MDI. Ao realizar

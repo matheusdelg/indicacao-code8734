@@ -12,7 +12,7 @@ class ValidationException extends Exception {
             "description" => $description,
         ];
 
-        parent::__construct(json_encode($obj));
+        parent::__construct(json_encode($obj, JSON_UNESCAPED_UNICODE));
     }
 }
 
@@ -25,7 +25,19 @@ class ServiceException extends Exception {
             "description" => $description,
         ];
 
-        parent::__construct(json_encode($obj));
+        parent::__construct(json_encode($obj, JSON_UNESCAPED_UNICODE));
     }
 
+}
+
+class InternalException extends Exception {
+    public function __construct($description) {
+        
+        $obj = [
+            "status" => ERR_INT,
+            "description" => $description,
+        ];
+
+        parent::__construct(json_encode($obj, JSON_UNESCAPED_UNICODE));
+    }
 }

@@ -17,15 +17,15 @@ class InternalDataModule extends DatabaseManipulator {
     }
 
     /**
-     * Verifica se há registro de 'indicated_email' na tabela 'indications' no banco de dados.
+     * Verifica se há registro de 'indicated' na tabela 'indication' no banco de dados.
      *
      * @param string $indicated_email
      * @return boolean
      */
-    public function checkIndicated(string $indicated_email) {
-        $indications = $this->getRecords('indications', ['indicated' => $indicated_email]);
+    public function checkIndicated(string $indicated) {
+        $indications = $this->getRecords('indication', ['indicated' => $indicated]);
         
-        return count($indications) == 0;
+        return count($indications) > 0;
     }
 
     /**
@@ -33,13 +33,26 @@ class InternalDataModule extends DatabaseManipulator {
      *
      * @param string $new_page_key
      */
-    public function registerPageKey(string $new_page_key) {
+    public function registerPageKey(string $page_key) {
 
-        $page_exists = $this->checkPageKey($new_page_key);
+        $page_exists = $this->checkPageKey($page_key);
 
         if (!$page_exists) {
-            $this->insertRecord('registered_pages', ['page_key' => $new_page_key]);
+            $this->insertRecord('registered_pages', ['page_key' => $page_key]);
+        }
+    }
+
+    /**
+     * Registra uma nova indicação válida na tabela 'indication' do banco de dados.
+     *
+     * @param array $indication
+     */
+    public function registerIndication(array $indication) {
+
+        $indication_exists = $this->checkIndicated($indication['indicated']);
+
+        if (!$indication_exists) {
+            $this->insertRecord('indication', $indication);
         }
     }
 }
-
